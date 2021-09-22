@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 
-namespace CoreCodeCamp.Data
+namespace PureWebApiCore.Data
 {
   public class CampContextFactory : IDesignTimeDbContextFactory<CampContext>
   {

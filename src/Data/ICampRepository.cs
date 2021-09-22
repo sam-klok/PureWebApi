@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CoreCodeCamp.Data
+namespace PureWebApiCore.Data
 {
   public interface ICampRepository
   {

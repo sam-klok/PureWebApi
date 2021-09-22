@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoreCodeCamp.Controllers
+namespace PureWebApiCore.Controllers
 {
   [Route("api/[controller]")]
   public class ValuesController

@@ -1,4 +1,4 @@
-﻿namespace CoreCodeCamp.Data
+﻿namespace PureWebApiCore.Data
 {
   public class Talk
   {

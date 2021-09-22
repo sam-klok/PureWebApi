@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace CoreCodeCamp.Data
+namespace PureWebApiCore.Data
 {
   public class CampContext : DbContext
   {
@@ -23,7 +23,7 @@ namespace CoreCodeCamp.Data
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseSqlServer(_config.GetConnectionString("CodeCamp"));
+      optionsBuilder.UseSqlServer(_config.GetConnectionString("PureWebApiCoreDB"));
     }
 
     protected override void OnModelCreating(ModelBuilder bldr)

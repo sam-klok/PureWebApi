@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CoreCodeCamp.Data
+namespace PureWebApiCore.Data
 {
   public class Camp
   {
