@@ -13,7 +13,7 @@ namespace PureWebApiCore.Controllers
 
     public string[] Get()
     {
-      return new[] { "Hello", "From","Pluralsight" };
+      return new[] { "Hello", "From","Sam" };
     }
   }
 }
