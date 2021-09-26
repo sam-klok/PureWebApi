@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using PureWebApiCore.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +12,33 @@ namespace PureWebApi.Controllers
     [Route("api/[controller]")]
     public class CampsController : ControllerBase
     {
-        public object Get()
+        private readonly ICampRepository _repository;
+        private readonly IMapper _mapper;
+
+        public CampsController(ICampRepository repository, IMapper mapper)
         {
-            return new { Moniker = "ATL2018", Name = "Atlanat Code" };
+            _repository = repository;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var results = await _repository.GetAllCampsAsync();
+                return Ok(results);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        //[HttpGet]
+        //public IActionResult GetSimple()
+        //{
+        //    return Ok(new { Moniker = "ATL2018", Name = "Atlanat Code" });
+        //}
 
         //public IActionResult Index()
         //{

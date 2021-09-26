@@ -1,13 +1,18 @@
 I'm playing with .Net Core Web Api project
 It also uses "Code First" approach to create database with EF.
+Added AutoMapper extensions for ASP.NET Core - a great tool when used for simple conversions.
 
 thank you
 sam klok
 
 Based on examples from internet. Links below:
-Building an API with ASP.NET Core - Pluralsight
 
-
+Building an API with ASP.NET Core
+by Shawn Wildermuth
+The skill of building a web-facing API isn’t optional anymore. 
+Whether you’re building a web site, mobile app, SPA, or enterprise tool, 
+building a well-designed API is required.
+ 
 List of issues, and articles I used:
 https://stackoverflow.com/questions/57066856/command-dotnet-ef-not-found-in-net-core-3
 dotnet tool install --global dotnet-ef

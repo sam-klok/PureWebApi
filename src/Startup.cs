@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Reflection;
 
 namespace PureWebApiCore
 {
@@ -20,6 +21,7 @@ namespace PureWebApiCore
     {
       services.AddDbContext<CampContext>();
       services.AddScoped<ICampRepository, CampRepository>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
       services.AddControllers();
     }
