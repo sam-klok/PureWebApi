@@ -143,5 +143,27 @@ namespace PureWebApi.Controllers
 
             return BadRequest();
         }
+
+        [HttpDelete("{moniker}")]
+        public async Task<IActionResult> Delete(string moniker)
+        {
+            try
+            {
+                var existingCamp = await _repository.GetCampAsync(moniker);
+                if (existingCamp == null)
+                    return BadRequest($"Could not find camp by this Moniker: {moniker}");
+
+                _repository.Delete(existingCamp);
+
+                if (await _repository.SaveChangesAsync())
+                    return Ok();
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+
+            return BadRequest();
+        }
     }
 }
