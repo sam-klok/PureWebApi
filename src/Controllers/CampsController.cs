@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using PureWebApi.Models;
 using PureWebApiCore.Data;
 using System;
@@ -11,15 +12,20 @@ using System.Threading.Tasks;
 namespace PureWebApi.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class CampsController : ControllerBase
     {
         private readonly ICampRepository _repository;
         private readonly IMapper _mapper;
+        private readonly LinkGenerator _linkGenerator;
 
-        public CampsController(ICampRepository repository, IMapper mapper)
+        public CampsController(ICampRepository repository, 
+            IMapper mapper,
+            LinkGenerator linkGenerator)
         {
             _repository = repository;
             _mapper = mapper;
+            _linkGenerator = linkGenerator;
         }
 
         [HttpGet]
@@ -85,6 +91,35 @@ namespace PureWebApi.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
+        }
+
+        public async Task<ActionResult<CampModel>> Post(CampModel model)
+        {
+            try
+            {
+                var existingCamp = await _repository.GetCampAsync(model.Moniker);
+                if (existingCamp != null)
+                    return BadRequest("Moniker exists.");
+
+                var location = _linkGenerator
+                    .GetPathByAction("Get", "Camps", new { moniker = model.Moniker });
+
+                if (string.IsNullOrWhiteSpace(location))
+                    return BadRequest("Could not use current moniker.");
+
+
+                var camp = _mapper.Map<Camp>(model);
+                _repository.Add(camp);
+
+                if (await _repository.SaveChangesAsync())
+                    return Created(location, _mapper.Map<CampModel>(camp));
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+
+            return BadRequest();
         }
     }
 }
