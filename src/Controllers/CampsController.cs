@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PureWebApi.Models;
 using PureWebApiCore.Data;
 using System;
 using System.Collections.Generic;
@@ -18,19 +19,41 @@ namespace PureWebApi.Controllers
         public CampsController(ICampRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(bool includeTalks = false)
         {
             try
             {
-                var results = await _repository.GetAllCampsAsync();
-                return Ok(results);
+                var results = await _repository.GetAllCampsAsync(includeTalks);
+
+                var models = _mapper.Map<CampModel[]>(results);
+                return Ok(models);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError);
+                //Console.WriteLine(ex);
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+
+        [HttpGet("{moniker}")]
+        public async Task<ActionResult<CampModel>> Get(string moniker)
+        {
+            try
+            {
+                var result = await _repository.GetCampAsync(moniker);
+
+                if (result == null)
+                    return NotFound();
+
+                return _mapper.Map<CampModel>(result);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
 

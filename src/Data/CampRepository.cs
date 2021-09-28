@@ -69,9 +69,9 @@ namespace PureWebApiCore.Data
 
       if (includeTalks)
       {
-        query = query
-          .Include(c => c.Talks)
-          .ThenInclude(t => t.Speaker);
+            query = query
+                .Include(d => d.Talks)
+                .ThenInclude(t => t.Speaker);
       }
 
       // Order It

@@ -1,4 +1,11 @@
 I'm playing with .Net Core Web Api project
+
+So list:
+1. .Net Core
+2. Web Api
+3. Adapter Pattern (AutoMapper extensions)
+4. EF, code first
+
 It also uses "Code First" approach to create database with EF.
 Added AutoMapper extensions for ASP.NET Core - a great tool when used for simple conversions.
 

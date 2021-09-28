@@ -21,7 +21,7 @@ namespace PureWebApiCore
     {
       services.AddDbContext<CampContext>();
       services.AddScoped<ICampRepository, CampRepository>();
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+      services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
       services.AddControllers();
     }
