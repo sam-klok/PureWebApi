@@ -68,5 +68,23 @@ namespace PureWebApi.Controllers
         //    return null;
         //    //return View();
         //}
+
+        [HttpGet("search/{theDate}")]
+        public async Task<ActionResult<CampModel[]>> SearchByDate(DateTime theDate, bool includeTalks = false)
+        {
+            try
+            {
+                var results = await _repository.GetAllCampsByEventDate(theDate, includeTalks);
+
+                if (!results.Any())
+                    return NotFound();
+
+                return _mapper.Map<CampModel[]>(results);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
     }
 }
