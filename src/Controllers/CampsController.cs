@@ -121,5 +121,27 @@ namespace PureWebApi.Controllers
 
             return BadRequest();
         }
+
+        [HttpPut("{moniker}")]
+        public async Task<ActionResult<CampModel>> Put(string moniker, CampModel campModel)
+        {
+            try
+            {
+                var existingCamp = await _repository.GetCampAsync(moniker);
+                if (existingCamp == null)
+                    return BadRequest($"Could not find camp by this Moniker: {moniker}");
+
+                _mapper.Map(campModel, existingCamp);
+
+                if (await _repository.SaveChangesAsync())
+                    return _mapper.Map<CampModel>(existingCamp);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+
+            return BadRequest();
+        }
     }
 }
