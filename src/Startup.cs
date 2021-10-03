@@ -15,33 +15,41 @@ using System.Reflection;
 
 namespace PureWebApiCore
 {
-  public class Startup
-  {
-    public void ConfigureServices(IServiceCollection services)
+    public class Startup
     {
-      services.AddDbContext<CampContext>();
-      services.AddScoped<ICampRepository, CampRepository>();
-      services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<CampContext>();
+            services.AddScoped<ICampRepository, CampRepository>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddApiVersioning(options =>
+                {
+                    options.AssumeDefaultVersionWhenUnspecified = true;
+                    options.DefaultApiVersion = new ApiVersion(1, 1);
+                    options.ReportApiVersions = true;
+                });
 
-      services.AddControllers();
+            services.AddControllers();
+            //services.AddControllers(o => o.EnableEndpointRouting = false)
+            //    .SetCompatibilityVersion(CompatibilityVersion.Latest);
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(cfg =>
+            {
+                cfg.MapControllers();
+            });
+        }
     }
-
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-      if (env.IsDevelopment())
-      {
-        app.UseDeveloperExceptionPage();
-      }
-
-      app.UseRouting();
-
-      app.UseAuthentication();
-      app.UseAuthorization();
-
-      app.UseEndpoints(cfg =>
-      {
-        cfg.MapControllers();
-      });
-    }
-  }
 }

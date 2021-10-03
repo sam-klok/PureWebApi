@@ -5,9 +5,14 @@ So list:
 2. Web Api
 3. Adapter Pattern (AutoMapper extensions)
 4. EF, code first
+5. API versioning
 
 It also uses "Code First" approach to create database with EF.
 Added AutoMapper extensions for ASP.NET Core - a great tool when used for simple conversions.
+
+Example of calls: 
+	http://localhost:6600/api/camps/atl2018/talks?api-version=1.0
+	http://localhost:6600/api/operations/reloadconfig?api-version=1.1
 
 thank you
 sam klok
