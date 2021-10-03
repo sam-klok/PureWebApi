@@ -108,6 +108,17 @@ namespace PureWebApiCore.Migrations
             migrationBuilder.InsertData(
                 table: "Speakers",
                 columns: new[] { "SpeakerId", "BlogUrl", "Company", "CompanyUrl", "FirstName", "GitHub", "LastName", "MiddleName", "Twitter" },
+                values: new object[] { 1, "http://examples.20m.com/", "N/A", "http://wilderminds.com", "Sergiy", "https://github.com/sergeklokov", "Klokov", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Speakers",
+                columns: new[] { "SpeakerId", "BlogUrl", "Company", "CompanyUrl", "FirstName", "GitHub", "LastName", "MiddleName", "Twitter" },
+                values: new object[] { 1, "http://examples.20m.com/", "N/A", "http://wilderminds.com", "Sam", "https://github.com/sam-klok", "Klok", null, null });
+
+
+            migrationBuilder.InsertData(
+                table: "Speakers",
+                columns: new[] { "SpeakerId", "BlogUrl", "Company", "CompanyUrl", "FirstName", "GitHub", "LastName", "MiddleName", "Twitter" },
                 values: new object[] { 1, "http://wildermuth.com", "Wilder Minds LLC", "http://wilderminds.com", "Shawn", "shawnwildermuth", "Wildermuth", null, "shawnwildermuth" });
 
             migrationBuilder.InsertData(

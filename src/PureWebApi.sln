@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureWebApi", "PureWebApi.cs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21BAB77D-3005-4422-8A62-7A4BC9FD0F9B}"
 	ProjectSection(SolutionItems) = preProject
+		INSERT [dbo].[Speakers].sql = INSERT [dbo].[Speakers].sql
 		..\Readme.txt = ..\Readme.txt
 	EndProjectSection
 EndProject
