@@ -76,3 +76,14 @@ Done.
 
 My SQL server connections strings: 
 Data Source=LIVING\MSSQLSERVER01;Initial Catalog=AdventureWorks2016CTP3;Integrated Security=True
+
+dotnet ef migrations add Identity
+
+If error:
+The entity type 'IdentityUserLogin<string>' requires a primary key to be defined.
+
+
+
+Some files copied from:
+https://github.com/DinkDev/DutchTreat/blob/master/DutchTreat/Data/DutchSeeder.cs
+https://github.com/lonelydev/DutchTreat/blob/master/DutchTreat/Data/DutchRepository.cs
